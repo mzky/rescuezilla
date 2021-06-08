@@ -1,4 +1,6 @@
-ARM64 platfrom debug!
+The debug branch of the ARM64 platform!
+
+==========================================
 
 
 [![Rescuezilla banner](docs/images/banner.big.png)](https://rescuezilla.com) 
