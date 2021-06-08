@@ -1,3 +1,6 @@
+ARM64 platfrom debug!
+
+
 [![Rescuezilla banner](docs/images/banner.big.png)](https://rescuezilla.com) 
 
 # Rescuezilla [![Build Status](https://api.travis-ci.com/rescuezilla/rescuezilla.svg?branch=master)](https://travis-ci.com/github/rescuezilla/rescuezilla) [![Translation status](https://hosted.weblate.org/widgets/rescuezilla/-/svg-badge.svg)](https://hosted.weblate.org/engage/rescuezilla/)
