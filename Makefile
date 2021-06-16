@@ -13,19 +13,19 @@ all: focal
 buildscripts = build.sh chroot.steps.part.1.sh chroot.steps.part.2.sh
 
 # ISO image based on Ubuntu 20.04 Focal LTS (Long Term Support) 64bit
-focal: ARCH=amd64
+focal: ARCH=arm64
 focal: CODENAME=focal
 export ARCH CODENAME
-focal: deb sfdisk.v2.20.1.amd64 partclone.restore.v0.2.43.amd64 partclone-utils partclone-nbd $(buildscripts)
+focal: deb partclone-utils partclone-nbd $(buildscripts)
 	./build.sh
 
 # ISO image based on Ubuntu 21.04 Hirsute 64bit as a temporary measure to provide a newer Linux kernel for better support for
 # recent hardware because Ubuntu 20.04 Focal immediately offer a Hardware Enablement / LTS Enablement Linux kernel for those
 # releases.
-hirsute: ARCH=amd64
+hirsute: ARCH=arm64
 hirsute: CODENAME=hirsute
 export ARCH CODENAME
-hirsute: deb sfdisk.v2.20.1.amd64 partclone.restore.v0.2.43.amd64 partclone-utils partclone-nbd $(buildscripts)
+hirsute: deb partclone-utils partclone-nbd $(buildscripts)
 	./build.sh
 
 # ISO image based on Ubuntu 18.04 Bionic LTS (Long Term Support) 32bit (the last 32bit/i386 Ubuntu LTS release)
@@ -97,7 +97,7 @@ partclone-utils:
 	cd $(PARTCLONE_UTILS_BUILD_DIR) && ./configure
 	# Create deb package from a standard Makefile's `make install` using the checkinstall tool (for cleaner uninstall)
 	cd $(PARTCLONE_UTILS_BUILD_DIR) && checkinstall --install=no --pkgname partclone-utils --pkgversion 0.4.2 --pkgrelease 1 --maintainer 'rescuezilla@gmail.com' -D --default  make install
-	mv $(PARTCLONE_UTILS_BUILD_DIR)/partclone-utils_0.4.2-1_amd64.deb $(AMD64_BUILD_DIR)/chroot/
+	mv $(PARTCLONE_UTILS_BUILD_DIR)/partclone-utils_0.4.2-1_$(ARCH).deb $(AMD64_BUILD_DIR)/chroot/
 
 # Builds partclone-nbd, a competitor project to partclone-utils that's also able to mount partclone images.
 partclone-nbd: SRC_DIR=$(shell pwd)/src/third-party/partclone-nbd
@@ -108,7 +108,7 @@ partclone-nbd:
 	cd $(PARTCLONE_NBD_BUILD_DIR) && cmake ${SRC_DIR}
 	# Create deb package from a standard Makefile's `make install` using the checkinstall tool (for cleaner uninstall)
 	cd $(PARTCLONE_NBD_BUILD_DIR) && checkinstall --install=no --pkgname partclone-nbd --pkgversion 0.0.3 --pkgrelease 1 --maintainer 'rescuezilla@gmail.com' -D --default  make install
-	mv $(PARTCLONE_NBD_BUILD_DIR)/partclone-nbd_0.0.3-1_amd64.deb $(AMD64_BUILD_DIR)/chroot/
+	mv $(PARTCLONE_NBD_BUILD_DIR)/partclone-nbd_0.0.3-1_$(ARCH).deb $(AMD64_BUILD_DIR)/chroot/
 
 clean-build-dir:
 	$(info * Unmounting chroot bind mounts)
