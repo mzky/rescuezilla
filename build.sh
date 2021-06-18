@@ -2,6 +2,9 @@
 
 # Echo each command
 set -x
+ARCH=arm64
+CODENAME=hirsute
+export ARCH CODENAME
 
 # Set the default base operating system, using the Ubuntu release's shortened code name [1].
 # [1] https://wiki.ubuntu.com/Releases
