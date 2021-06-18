@@ -103,6 +103,36 @@ pkgs_specific_to_ubuntu2104_hirsute=(
                        "nbdkit"
 )
 
+pkgs_specific_to_ubuntu2004_focal_arm64=("linux-generic-hwe-18.04"
+                        "xserver-xorg-hwe-18.04"
+                        "xserver-xorg-video-all-hwe-18.04"
+                        "xserver-xorg-video-intel-hwe-18.04"
+                        "xserver-xorg-video-qxl-hwe-18.04"
+                        # Packages which may assist users needing to do a GRUB repair (64-bit EFI)
+                       "shim-signed"
+                       "grub-efi-arm64-signed"
+                       "grub-efi-arm64-bin"
+                       "grub-efi-ia32-bin"
+                       # Dependency for partclone-utils' imagemount
+                       "nbdkit"
+)
+
+pkgs_specific_to_ubuntu2104_hirsute_arm64=(
+			"linux-generic"
+                        "xserver-xorg"
+                        "xserver-xorg-video-all"
+                        "xserver-xorg-video-intel"
+                        "xserver-xorg-video-qxl"
+                        "xserver-xorg-video-mga"
+                        # Packages which may assist users needing to do a GRUB repair (64-bit EFI)
+                       "shim-signed"
+                       "grub-efi-arm64-signed"
+                       "grub-efi-arm64-bin"
+                       "grub-efi-ia32-bin"
+                       # Dependency for partclone-utils' imagemount
+                       "nbdkit"
+)
+
 # Packages common to both  32-bit and 64-bit build
 # TODO: Documentation each package with why these particular packages are present,
 # TODO: and what they do.
@@ -235,6 +265,10 @@ elif  [ "$ARCH" == "amd64" ] && [ "$CODENAME" == "focal" ]; then
   apt_pkg_list=("${pkgs_specific_to_ubuntu2004_focal[@]}" "${common_pkgs[@]}")
 elif  [ "$ARCH" == "amd64" ] && [ "$CODENAME" == "hirsute" ]; then
   apt_pkg_list=("${pkgs_specific_to_ubuntu2104_hirsute[@]}" "${common_pkgs[@]}")
+ elif  [ "$ARCH" == "arm64" ] && [ "$CODENAME" == "focal" ]; then
+  apt_pkg_list=("${pkgs_specific_to_ubuntu2004_focal_arm64[@]}" "${common_pkgs[@]}")
+elif  [ "$ARCH" == "arm64" ] && [ "$CODENAME" == "hirsute" ]; then
+  apt_pkg_list=("${pkgs_specific_to_ubuntu2104_hirsute_arm64[@]}" "${common_pkgs[@]}")
 else
   echo "Warning: unknown CPU arch $ARCH or Ubuntu release codename $CODENAME"
   exit 1
