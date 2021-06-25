@@ -8,11 +8,20 @@
 # [1] http://archive.ubuntu.com/ubuntu
 # [2] http://old-releases.ubuntu.com/ubuntu
 
-deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE main universe multiverse
-deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-updates main universe multiverse
-deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-security main universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute main multiverse restricted universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-security main multiverse restricted universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-updates main multiverse restricted universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-backports main multiverse restricted universe
+deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute main multiverse restricted universe
+deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-security main multiverse restricted universe
+deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-updates main multiverse restricted universe
+deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ hirsute-backports main multiverse restricted universe
+
+#deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE main universe multiverse
+#deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-updates main universe multiverse
+#deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-security main universe multiverse
 
 # Backports and proposed configured with a preference file to ensure its never
 # automatically selected
-deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-backports main universe multiverse
-deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-proposed main universe multiverse
+#deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-backports main universe multiverse
+#deb http://archive.ubuntu.com/ubuntu CODENAME_SUBSTITUTE-proposed main universe multiverse

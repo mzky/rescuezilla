@@ -97,6 +97,7 @@ partclone-utils:
 	cd $(PARTCLONE_UTILS_BUILD_DIR) && ./configure
 	# Create deb package from a standard Makefile's `make install` using the checkinstall tool (for cleaner uninstall)
 	cd $(PARTCLONE_UTILS_BUILD_DIR) && checkinstall --install=no --pkgname partclone-utils --pkgversion 0.4.2 --pkgrelease 1 --maintainer 'rescuezilla@gmail.com' -D --default  make install
+	cp -rf /mnt/chroot $(AMD64_BUILD_DIR)/
 	mv $(PARTCLONE_UTILS_BUILD_DIR)/partclone-utils_0.4.2-1_$(ARCH).deb $(AMD64_BUILD_DIR)/chroot/
 
 # Builds partclone-nbd, a competitor project to partclone-utils that's also able to mount partclone images.

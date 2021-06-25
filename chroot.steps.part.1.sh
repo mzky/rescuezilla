@@ -119,18 +119,13 @@ pkgs_specific_to_ubuntu2004_focal_arm64=("linux-generic-hwe-18.04"
 
 pkgs_specific_to_ubuntu2104_hirsute_arm64=(
 			"linux-generic"
-                        "xserver-xorg"
-                        "xserver-xorg-video-all"
-                        "xserver-xorg-video-intel"
-                        "xserver-xorg-video-qxl"
-                        "xserver-xorg-video-mga"
-                        # Packages which may assist users needing to do a GRUB repair (64-bit EFI)
-                       "shim-signed"
-                       "grub-efi-arm64-signed"
-                       "grub-efi-arm64-bin"
-                       "grub-efi-ia32-bin"
-                       # Dependency for partclone-utils' imagemount
-                       "nbdkit"
+			"xserver-xorg"
+			"xserver-xorg-video-all"
+			"xdiagnose"
+			"shim-signed"
+			"grub-efi-arm64-signed"
+			"grub-efi-arm64-bin"
+			"nbdkit" 
 )
 
 # Packages common to both  32-bit and 64-bit build
@@ -214,7 +209,7 @@ common_pkgs=("discover"
              "clonezilla"
              "testdisk"
              "gddrescue"
-             "usb-creator-gtk"
+             #"usb-creator-gtk"
              "wodim"
              # CLI tool to install *.deb files while resolving dependencies
              "gdebi-core"
@@ -238,7 +233,7 @@ common_pkgs=("discover"
              "xfsdump"
              "xfsprogs"
              "udftools"
-             "grub-pc-bin"
+             #"grub-pc-bin"
              "grub2-common"
              "language-pack-gnome-fr-base"
              "language-pack-gnome-da-base"

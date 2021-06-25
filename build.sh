@@ -20,7 +20,6 @@ BASEDIR=$(dirname $(readlink -f "$0"))
 RESCUEZILLA_ISO_FILENAME=rescuezilla.$ARCH.$CODENAME.iso
 # The build directory is "build/", unless overridden by an environment variable
 BUILD_DIRECTORY=${BUILD_DIRECTORY:-build/${CODENAME}.${ARCH}}
-mkdir -p "$BUILD_DIRECTORY/chroot"
 # Ensure the build directory is an absolute path
 BUILD_DIRECTORY=$( readlink -f "$BUILD_DIRECTORY" )
 PKG_CACHE_DIRECTORY=${PKG_CACHE_DIRECTORY:-pkg.cache}
@@ -64,7 +63,7 @@ if [ ! -d "$PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY" ] ; then
     # [1] http://old-releases.ubuntu.com/ubuntu
     TARGET_FOLDER=`readlink -f $PKG_CACHE_DIRECTORY/$DEBOOTSTRAP_CACHE_DIRECTORY`
     pushd ${DEBOOTSTRAP_SCRIPT_DIRECTORY}
-    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER http://archive.ubuntu.com/ubuntu/
+    DEBOOTSTRAP_DIR=${DEBOOTSTRAP_SCRIPT_DIRECTORY} ./debootstrap --arch=$ARCH --foreign $CODENAME $TARGET_FOLDER  http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports
     RET=$?
     popd
     if [[ $RET -ne 0 ]]; then
@@ -277,10 +276,10 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-cp /boot/memtest86+.bin image/memtest/
+#cp /boot/memtest86+.bin image/memtest/
 if [[ $? -ne 0 ]]; then
     echo "Error: Failed to copy memtest86+ binary from host system."
-    exit 1
+#    exit 1
 fi
 
 # Create manifest
