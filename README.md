@@ -1,4 +1,94 @@
 The debug branch of the ARM64 platform!
+编译成功后在国产主板上始终无法启动，使用统信和麒麟系统部署deb包后也无法启动
+暂时换用再生龙arm版：http://free.nchc.org.tw/clonezilla-live/experimental/arm/2.6.6-11/ 
+再生龙自动化配置：
+
+
+\boot\grub\grub.cfg
+```
+set pref=/boot/grub
+set default="0"
+set color_normal=white/black
+set color_highlight=cyan/black
+loadfont $pref/unicode.pf2
+ 
+menuentry "PCM Disk Tools for aarch64 -- Automatic Backup Disk" {
+  search --set -f /live/vmlinuz
+  set imagename="???"
+  linux /live/vmlinuz boot=live union=overlay config components noeject quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="yes" locales=zh_CN.UTF-8 vga=788 toram=filesystem.squashfs ip=frommedia nosplash ocs_prerun="mount `ls /dev/sdb?|tail -1` /mnt;mount –o remount,rw /mnt;mount --bind /mnt/home/partimag /home/partimag" ocs_live_extra_param="" ocs_live_run="ocs-sr -q2 -j2 -nogui -gs -z1p -i 4096 -sfsck -senc -p poweroff savedisk ${imagename} sda" 
+  initrd /live/initrd.img
+  ###########################################################################
+  # Will ??? Change the folder name of the [Backup] image 
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "PCM Disk Tools for aarch64 -- Automatic Recovery Disk"{
+  search --set -f /live/vmlinuz
+  set imagename="???"
+  linux /live/vmlinuz boot=live union=overlay config components noeject quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="yes" locales=zh_CN.UTF-8 vga=788 toram=filesystem.squashfs ip=frommedia nosplash ocs_prerun="mount `ls /dev/sdb?|tail -1` /mnt;mount –o remount,rw /mnt;mount --bind /mnt/home/partimag /home/partimag" ocs_live_run="ocs-live-restore" ocs_live_extra_param="-g auto -e1 auto -e2 -nogui -r -j2 -cs -p poweroff restoredisk ${imagename} sda"
+  initrd /live/initrd.img
+  ###########################################################################
+  # Will ??? Change to the name of the mirrored folder required for [Restore]
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "PCM Disk Tools for aarch64 -- Manual Operation"{
+  search --set -f /live/vmlinuz
+  linux /live/vmlinuz boot=live union=overlay config components quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="no" locales=zh_CN.UTF-8 vga=788 ip=frommedia nosplash ocs_prerun="lsblk" ocs_prerun1="echo Press ctrl+c to switch to the command line" ocs_prerun2="sleep 6" ocs_live_run="ocs-live-general" ocs_live_extra_param=""
+  initrd /live/initrd.img
+  ###########################################################################
+  # Manually backup or restore a disk or partition
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "PCM Disk Tools for x86_64 --- Automatic Backup Disk" {
+  search --set -f /casper/vmlinuz
+  set imagename="???"
+  linux /casper/vmlinuz boot=casper union=overlay config components noeject quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="yes" locales=zh_CN.UTF-8 vga=788 toram=filesystem.squashfs ip=frommedia nosplash ocs_prerun="mount `ls /dev/sdb?|tail -1` /mnt;mount –o remount,rw /mnt;mount --bind /mnt/home/partimag /home/partimag" ocs_live_extra_param="" ocs_live_run="ocs-sr -q2 -j2 -nogui -gs -z1p -i 4096 -sfsck -senc -p poweroff savedisk ${imagename} sda" 
+  initrd /casper/initrd.img
+  ###########################################################################
+  # Will ??? Change the folder name of the [Backup] image 
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "PCM Disk Tools for x86_64 --- Automatic Recovery Disk"{
+  search --set -f /casper/vmlinuz
+  set imagename="???"
+  linux /casper/vmlinuz boot=casper union=overlay config components noeject quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="yes" locales=zh_CN.UTF-8 vga=788 toram=filesystem.squashfs ip=frommedia nosplash ocs_prerun="mount `ls /dev/sdb?|tail -1` /mnt;mount –o remount,rw /mnt;mount --bind /mnt/home/partimag /home/partimag" ocs_live_run="ocs-live-restore" ocs_live_extra_param="-g auto -e1 auto -e2 -nogui -r -j2 -cs -p poweroff restoredisk ${imagename} sda"
+  initrd /casper/initrd.img
+  ###########################################################################
+  # Will ??? Change to the name of the mirrored folder required for [Restore]
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "PCM Disk Tools for x86_64 --- Manual Operation"{
+  search --set -f /casper/vmlinuz
+  linux /casper/vmlinuz boot=casper union=overlay config components quiet noswap edd=on nomodeset noprompt keyboard-layouts=NONE ocs_live_batch="no" locales=zh_CN.UTF-8 vga=788 ip=frommedia nosplash ocs_prerun="lsblk" ocs_prerun1="echo Press ctrl+c to switch to the command line" ocs_prerun2="sleep 6" ocs_live_run="ocs-live-general" ocs_live_extra_param=""
+  initrd /casper/initrd.img
+  ###########################################################################
+  # Manually backup or restore a disk or partition
+  # Press Ctrl + X to execute
+  ###########################################################################
+}
+
+menuentry "Local Disk Boot" --id local-disk {
+  echo "Booting first local disk..."
+  configfile /boot/grub/boot-local-efi.cfg
+  echo "No uEFI boot loader was found!"
+  sleep 15
+}
+
+menuentry "BIOS Setup" --id uefi-firmware {
+  fwsetup
+  echo "No uEFI boot loader was found!"
+  sleep 15
+}
+```
 
 ==========================================
 
