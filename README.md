@@ -1,8 +1,10 @@
 The debug branch of the ARM64 platform!
-编译成功后在国产主板上始终无法启动，使用统信和麒麟系统部署deb包后也无法启动
-暂时换用再生龙arm版：http://free.nchc.org.tw/clonezilla-live/experimental/arm/2.6.6-11/ 
-再生龙自动化配置：
 
+编译成功后在国产主板上始终无法启动，使用统信和麒麟系统部署deb包后也无法启动
+
+暂时换用再生龙arm版：http://free.nchc.org.tw/clonezilla-live/experimental/arm/2.6.6-11/ 
+
+再生龙自动化配置：
 
 \boot\grub\grub.cfg
 ```
